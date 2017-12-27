@@ -16,10 +16,10 @@ type Cursor(keys: list<BranchTag>, finalKey: Key) =
         // | h -> Branch(h, Cursor(kn, finalKey)) :> IView
         // | _ -> Leaf(finalKey) :> IView
 
-    static member Doc(): Cursor =
+    static member Doc() =
         Cursor.WithFinalKey(DocK())
 
-    static member WithFinalKey(finalKey: Key): Cursor =
+    static member WithFinalKey(finalKey: Key) =
         Cursor(list.Empty, finalKey)
 
 type View = interface end
