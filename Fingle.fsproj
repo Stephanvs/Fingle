@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="ReplicaId.fs" />
+    <Compile Include="Id.fs" />
+    <Compile Include="Key.fs" />
+    <Compile Include="Val.fs" />
+    <Compile Include="TypeTag.fs" />
+    <Compile Include="Cursor.fs" />
+    <Compile Include="Mutation.fs" />
+    <Compile Include="Operation.fs" />
+    <Compile Include="Replica.fs" />
+  </ItemGroup>
+</Project>
