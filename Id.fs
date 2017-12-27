@@ -19,5 +19,5 @@ type Id(opsCounter: bigint, replicaId: ReplicaId) =
     interface IComparable with
         member this.CompareTo(o) =
             match o with
-            | :? Id as id -> compare this.ReplicaId id.ReplicaId
+            | :? Id as id -> compare this.ReplicaId id.ReplicaId + compare this.OpsCounter id.OpsCounter
             | _ -> -1
