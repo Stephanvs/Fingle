@@ -20,16 +20,12 @@ type Str =
     }
     interface ILeafVal
 
-type EmptyMap = inherit IBranchVal
-
-type EmptyList = inherit IBranchVal
-
 type Val =
     | Num of Num
     | Str of Str
-    | True
-    | False
-    | Null
-    | EmptyMap of EmptyMap
-    | EmptyList of EmptyList
+    | True of ILeafVal
+    | False of ILeafVal
+    | Null of ILeafVal
+    | EmptyMap of IBranchVal
+    | EmptyList of IBranchVal
     interface IVal
