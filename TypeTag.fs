@@ -1,21 +1,27 @@
 ﻿namespace Fingle
 
-type TypeTag =
-    abstract member Key: Key with get
+type ITypeTag = interface end
+
+type MapT =
+    {
+        key: Key
+    }
+
+type ListT =
+    {
+        key: Key
+    }
+
+type RegT =
+    {
+        key: Key
+    }
 
 type BranchTag =
-    inherit TypeTag
+    | MapT of MapT
+    | ListT of ListT
+    interface ITypeTag
 
-type MapT(key: Key) =
-    interface BranchTag
-    interface TypeTag with
-        member __.Key = key
-
-type ListT(key: Key) =
-    interface BranchTag
-    interface TypeTag with
-        member __.Key = key
-
-type RegT(key: Key) =
-    interface TypeTag with
-        member __.Key = key
+type TypeTag =
+    | RegT of RegT
+    interface ITypeTag

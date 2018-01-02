@@ -1,34 +1,54 @@
 ﻿namespace Fingle
 
-[<Sealed>]
-type Cursor(keys: list<BranchTag>, finalKey: Key) =
+type ICursor =
+    interface end
 
-    member __.Keys = keys
+type IView =
+    interface end
 
-    member __.FinalKey = finalKey
+type Leaf =
+    {
+        finalKey: Key
+    }
+    interface IView
 
-    member __.Append(tag: (Key -> BranchTag), newFinalKey: Key) =
-        Cursor(__.Keys, newFinalKey)
+type Branch =
+    {
+        head: BranchTag
+        tail: ICursor
+    }
+    interface IView
 
-    // member __.View(): IView =
-    //     Leaf(DocK()) :> IView
-        // match __.Keys with
-        // | h -> Branch(h, Cursor(kn, finalKey)) :> IView
-        // | _ -> Leaf(finalKey) :> IView
+type Cursor =
+    {
+        keys: list<BranchTag>
+        finalKey: Key
+    }
+    interface ICursor
 
-    static member Doc() =
-        Cursor.WithFinalKey(DocK())
+    member __.Append(tag: Key -> BranchTag, newFinalKey: Key): Cursor =
+        {
+            keys = List.append __.keys [tag(__.finalKey)]
+            finalKey = newFinalKey
+        }
 
-    static member WithFinalKey(finalKey: Key) =
-        Cursor(list.Empty, finalKey)
+    member __.View(): IView =
+        match __.keys with
+        | x :: xs ->
+            {
+                head = x
+                tail = { keys = xs; finalKey = __.finalKey }
+            } :> IView
+        | _ ->
+            {
+                finalKey = __.finalKey
+            } :> IView
 
-type View = interface end
+    static member Doc(): Cursor =
+        Cursor.WithFinalKey(Key.DocK)
 
-type Leaf(finalKey: Key) =
-    interface View
-    member __.FinalKey = finalKey
-
-type Branch(head: BranchTag, tail: Cursor) =
-    interface View
-    member __.Head = head
-    member __.Tail = tail
+    static member WithFinalKey(finalKey: Key): Cursor =
+        {
+            keys = List.empty
+            finalKey = finalKey
+        }

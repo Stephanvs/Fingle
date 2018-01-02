@@ -13,6 +13,8 @@
     <Compile Include="Cursor.fs" />
     <Compile Include="Mutation.fs" />
     <Compile Include="Operation.fs" />
+    <Compile Include="ListRef.fs" />
+    <Compile Include="Node.fs" />
     <Compile Include="Replica.fs" />
   </ItemGroup>
 </Project>

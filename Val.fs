@@ -1,32 +1,35 @@
 ﻿namespace Fingle
 
-type Val = interface end
+type IVal = interface end
 
-type LeafVal =
-    inherit Val
+type ILeafVal =
+    inherit IVal
 
-type BranchVal =
-    inherit Val
+type IBranchVal =
+    inherit IVal
 
-type Num(value: decimal) =
-    interface LeafVal
-    member __.Value = value
+type Num =
+    {
+        value: decimal
+    }
+    interface ILeafVal
 
-type Str(value: string) =
-    interface LeafVal
-    member __.Value = value
+type Str =
+    {
+        value: string
+    }
+    interface ILeafVal
 
-type True() =
-    interface LeafVal
+type EmptyMap = inherit IBranchVal
 
-type False() =
-    interface LeafVal
+type EmptyList = inherit IBranchVal
 
-type Null() =
-    interface LeafVal
-
-type EmptyMap() =
-    interface BranchVal
-
-type EmptyList() =
-    interface BranchVal
+type Val =
+    | Num of Num
+    | Str of Str
+    | True
+    | False
+    | Null
+    | EmptyMap of EmptyMap
+    | EmptyList of EmptyList
+    interface IVal

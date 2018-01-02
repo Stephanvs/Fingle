@@ -14,7 +14,7 @@ type Cmd =
     interface end
 
 module Cmd =
-    type Let(x: Expr.Var, expr: Expr) =
+    type Let(x: Var, expr: Expr) =
         interface Cmd
         member __.X = x
         member __.Expr = expr

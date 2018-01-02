@@ -1,15 +1,23 @@
 ﻿namespace Fingle
 
-type Key = interface end
+type IKey =
+    interface end
 
-type DocK() = interface Key
+type IdK =
+    {
+        id: Id
+    }
+    interface IKey
 
-type HeadK() = interface Key
+type StrK =
+    {
+        str: string
+    }
+    interface IKey
 
-type IdK(id: Id) =
-    interface Key
-    member __.Id = id
-
-type StrK(str: string) =
-    interface Key
-    member __.Str = str
+type Key =
+    | DocK
+    | HeadK
+    | IdK of IdK
+    | StrK of StrK
+    interface IKey
