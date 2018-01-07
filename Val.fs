@@ -2,30 +2,30 @@
 
 type IVal = interface end
 
-type ILeafVal =
+type LeafVal =
     inherit IVal
 
-type IBranchVal =
+type BranchVal =
     inherit IVal
 
 type Num =
     {
         value: decimal
     }
-    interface ILeafVal
+    interface LeafVal
 
 type Str =
     {
         value: string
     }
-    interface ILeafVal
+    interface LeafVal
 
 type Val =
     | Num of Num
     | Str of Str
-    | True of ILeafVal
-    | False of ILeafVal
-    | Null of ILeafVal
-    | EmptyMap of IBranchVal
-    | EmptyList of IBranchVal
+    | True of LeafVal
+    | False of LeafVal
+    | Null of LeafVal
+    | EmptyMap of BranchVal
+    | EmptyList of BranchVal
     interface IVal

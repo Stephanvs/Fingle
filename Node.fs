@@ -24,7 +24,7 @@ type ListNode =
 
 type RegNode =
     {
-        regValues: Map<Id, ILeafVal>
+        regValues: Map<Id, LeafVal>
     }
     interface Node
 
