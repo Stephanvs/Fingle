@@ -6,34 +6,34 @@ type Var =
     {
         name: string
     }
-    // interface IExpr
+     interface IExpr
 
 type DownField =
     {
         expr: IExpr
         key: string
     }
-    // interface IExpr
+     interface IExpr
 
 type Iter =
     {
         expr: IExpr
     }
-    // interface IExpr
+     interface IExpr
 
 type Next =
     {
         expr: IExpr
     }
-    // interface IExpr
+     interface IExpr
 
 type Expr =
-    | Doc
+    | Doc of IExpr
     | Var of Var
     | DownField of DownField
     | Iter of Iter
     | Next of Next
-    interface IExpr
+    //interface IExpr
 
 
 // type Expr =

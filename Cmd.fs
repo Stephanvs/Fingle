@@ -1,45 +1,58 @@
 namespace Fingle
 
-[<AbstractClass>]
-type BeforeAfter() =
-    class end
-
-type Before() =
-    inherit BeforeAfter()
-
-type After() =
-    inherit BeforeAfter()
-
-type Cmd =
+type BeforeAfter =
     interface end
 
-module Cmd =
-    type Let(x: Var, expr: Expr) =
-        interface Cmd
-        member __.X = x
-        member __.Expr = expr
+type Before =
+    inherit BeforeAfter
 
-    type Assign(expr: Expr, value: Val) =
-        interface Cmd
-        member __.Expr = expr
-        member __.Value = value
+type After =
+    inherit BeforeAfter
 
-    type Insert(expr: Expr, value: Val) =
-        interface Cmd
-        member __.Expr = expr
-        member __.Value = value
+type ICmd =
+    interface end
 
-    type Delete(expr: Expr) =
-        interface Cmd
-        member __.Expr = expr
+type Let =
+    {
+        X: Var
+        Expr: Expr
+    }
 
-    type MoveVertical(moveExpr: Expr, targetExpr: Expr, beforeAfter: BeforeAfter) =
-        interface Cmd
-        member __.MoveExpr = moveExpr
-        member __.TargetExpr = targetExpr
-        member __.BeforeAfter = beforeAfter
+type Assign =
+    {
+        Expr: Expr
+        Value: Val
+    }
 
-    type Sequence(cmd1: Cmd, cmd2: Cmd) =
-        interface Cmd
-        member __.Cmd1 = cmd1
-        member __.Cmd2 = cmd2
+type Insert =
+    {
+        Expr: Expr
+        Value: Val
+    }
+
+type Delete =
+    {
+        Expr: Expr
+    }
+
+type MoveVertical =
+    {
+        MoveExpr: Expr
+        TargetExpr: Expr
+        BeforeAfter: BeforeAfter
+    }
+
+type Sequence =
+    {
+        Cmd1: ICmd
+        Cmd2: ICmd
+    }
+
+type Cmd =
+    | Let of Let
+    | Assign of Assign
+    | Insert of Insert
+    | Delete of Delete
+    | MoveVertical of MoveVertical
+    | Sequence of Sequence
+    interface ICmd

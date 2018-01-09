@@ -11,7 +11,26 @@ type Replica =
         receivedOps: List<Operation>
     }
 
-    member __.Empty(replicaId) =
+    member __.EvalExpr(expr: Expr): ICursor =
+        failwithf "Not implemented"
+
+    static member ApplyCmds(replica: Replica, cmds: List<Cmd>): Replica =
+        match cmds with
+        | cmd :: rest ->
+            match cmd with
+            | Let { Let.X = x; Let.Expr = expr; } -> // todo: cast Let to Cmd or change type definition of Cmd. maybe something like type Cmd = | x | y
+                let cur = replica.EvalExpr(expr)
+                let newReplica = { replica with variables = replica.variables.Add(x, cur) }
+                Replica.ApplyCmds(newReplica, rest)
+            | Sequence { Sequence.Cmd1 = cmd1; Cmd2 = cmd2 } ->
+                Replica.ApplyCmds(replica, [cmd1] :: [cmd2] :: rest)
+            | _ ->
+                replica
+        | _ ->
+            replica
+
+
+    static member Empty(replicaId: ReplicaId): Replica =
         {
             replicaId = replicaId
             opsCounter = bigint.Zero
@@ -24,7 +43,7 @@ type Replica =
 
 
 
-// module Replica =
+ //module Replica =
     // let hello name =
     //     printfn "%s", { Str.value = name }
 
