@@ -12,23 +12,37 @@ type Replica =
     }
 
     member __.EvalExpr(expr: Expr): ICursor =
-        failwithf "Not implemented"
+        failwith "Not implemented"
 
-    static member ApplyCmds(replica: Replica, cmds: List<Cmd>): Replica =
+    member __.MakeOp(cursor, mutation): Replica =
+        failwith "Not implemented"
+
+    static member ApplyCmds(replica: Replica, cmds: Cmd list): Replica =
         match cmds with
         | cmd :: rest ->
             match cmd with
-            | Let { Let.X = x; Let.Expr = expr; } -> // todo: cast Let to Cmd or change type definition of Cmd. maybe something like type Cmd = | x | y
-                let cur = replica.EvalExpr(expr)
-                let newReplica = { replica with variables = replica.variables.Add(x, cur) }
+            | :? Let as c ->
+                let cur = replica.EvalExpr(c.Expr)
+                let newReplica = { replica with variables = replica.variables.Add(c.X, cur) }
                 Replica.ApplyCmds(newReplica, rest)
-            | Sequence { Sequence.Cmd1 = cmd1; Cmd2 = cmd2 } ->
-                Replica.ApplyCmds(replica, [cmd1] :: [cmd2] :: rest)
+            | :? Assign as c ->
+                let newReplica = replica.MakeOp(replica.EvalExpr(c.Expr), { AssignM.Value = c.Value })
+                Replica.ApplyCmds(newReplica, rest)
+            | :? Insert as c ->
+                let newReplica = replica.MakeOp(replica.EvalExpr(c.Expr), { InsertM.Value = c.Value })
+                Replica.ApplyCmds(newReplica, rest)
+            | :? Delete as c ->
+                let newReplica = replica.MakeOp(replica.EvalExpr(c.Expr), DeleteM)
+                Replica.ApplyCmds(newReplica, rest)
+            | :? MoveVertical as c ->
+                let newReplica = replica.MakeOp(replica.EvalExpr(c.MoveExpr), { MoveVerticalM.TargetCursor = replica.EvalExpr(c.TargetExpr); MoveVerticalM.BeforeAfter = c.BeforeAfter })
+                Replica.ApplyCmds(newReplica, rest)
+            | :? Sequence as c ->
+                Replica.ApplyCmds(replica, c.Cmd1 :: c.Cmd2 :: rest)
             | _ ->
                 replica
         | _ ->
             replica
-
 
     static member Empty(replicaId: ReplicaId): Replica =
         {

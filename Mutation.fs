@@ -2,18 +2,24 @@
 
 type Mutation = interface end
 
-type AssignM(value: Val) =
+type AssignM =
+    {
+        Value: Val
+    }
     interface Mutation
-    member __.Value = value
 
-type InsertM(value: Val) =
+type InsertM =
+    {
+        Value: Val
+    }
     interface Mutation
-    member __.Value = value
 
-type MoveVerticalM(targetCursor: Cursor, aboveBelow: BeforeAfter) =
+type MoveVerticalM =
+    {
+        TargetCursor: ICursor
+        BeforeAfter: BeforeAfter
+    }
     interface Mutation
-    member __.TargetCursor = targetCursor
-    member __.AboveBelow = aboveBelow
 
 type DeleteM() =
     interface Mutation

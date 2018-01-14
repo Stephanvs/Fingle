@@ -9,7 +9,7 @@ type Before =
 type After =
     inherit BeforeAfter
 
-type ICmd =
+type Cmd =
     interface end
 
 type Let =
@@ -17,23 +17,27 @@ type Let =
         X: Var
         Expr: Expr
     }
+    interface Cmd
 
 type Assign =
     {
         Expr: Expr
         Value: Val
     }
+    interface Cmd
 
 type Insert =
     {
         Expr: Expr
         Value: Val
     }
+    interface Cmd
 
 type Delete =
     {
         Expr: Expr
     }
+    interface Cmd
 
 type MoveVertical =
     {
@@ -41,18 +45,11 @@ type MoveVertical =
         TargetExpr: Expr
         BeforeAfter: BeforeAfter
     }
+    interface Cmd
 
 type Sequence =
     {
-        Cmd1: ICmd
-        Cmd2: ICmd
+        Cmd1: Cmd
+        Cmd2: Cmd
     }
-
-type Cmd =
-    | Let of Let
-    | Assign of Assign
-    | Insert of Insert
-    | Delete of Delete
-    | MoveVertical of MoveVertical
-    | Sequence of Sequence
-    interface ICmd
+    interface Cmd
