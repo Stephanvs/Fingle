@@ -19,7 +19,7 @@ type Replica =
 
     member __.ApplyLocal(op) =
         { __ with
-            document = __.document.ApplyOp(op, __)
+            //document = __.document.ApplyOp(op, __)
             processedOps = __.processedOps.Add(op.id)
             generatedOps = __.generatedOps @ [op]
         }
@@ -58,7 +58,6 @@ type Replica =
         let newReplica = __.IncrementCounter()
         let op = { Operation.id = newReplica.CurrentId(); Operation.deps = __.processedOps; Operation.cur = cursor; Operation.mut = mutation }
         newReplica.ApplyLocal(op)
-        failwith "Not implemented"
 
     static member ApplyCmds(replica: Replica, cmds: Cmd list) =
         match cmds with
