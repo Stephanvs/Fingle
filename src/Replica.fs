@@ -20,7 +20,7 @@ type Replica =
     static member ApplyCmds(replica: Replica, cmds: Cmd list) =
         match cmds with
         | cmd :: rest ->
-            match box cmd with
+            match cmd with
             | :? Let as c ->
                 let cur = replica.EvalExpr(c.Expr)
                 let newReplica = { replica with variables = replica.variables.Add(c.X, cur) }
