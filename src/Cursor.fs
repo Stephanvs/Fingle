@@ -8,25 +8,25 @@ type IView =
 
 type Leaf =
     {
-        FinalKey: Key
+        FinalKey: IKey
     }
     interface IView
 
 type Branch =
     {
-        head: BranchTag
+        head: IBranchTag
         tail: ICursor
     }
     interface IView
 
 type Cursor =
     {
-        Keys: list<BranchTag>
-        FinalKey: Key
+        Keys: list<IBranchTag>
+        FinalKey: IKey
     }
     interface ICursor
 
-    member __.Append(tag: Key -> BranchTag, newFinalKey: Key): Cursor =
+    member __.Append(tag: IKey -> IBranchTag, newFinalKey: IKey) =
         {
             Keys = List.append __.Keys [tag(__.FinalKey)]
             FinalKey = newFinalKey
@@ -45,10 +45,10 @@ type Cursor =
             } :> IView
 
     static member Doc() =
-        Cursor.WithFinalKey(Key.DocK)
+        Cursor.WithFinalKey(DocK())
 
-    static member WithFinalKey(finalKey: Key) =
+    static member WithFinalKey(finalKey: IKey) =
         {
             Keys = List.empty
             FinalKey = finalKey
-        } :> ICursor
+        }

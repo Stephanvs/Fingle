@@ -5,19 +5,22 @@ type IKey =
 
 type IdK =
     {
-        id: Id
+        Id: Id
     }
     interface IKey
 
 type StrK =
     {
-        str: string
+        Str: string
     }
     interface IKey
 
-type Key =
-    | DocK
-    | HeadK
-    | IdK of IdK
-    | StrK of StrK
-    interface IKey
+type HeadK() = interface IKey
+type DocK() = interface IKey
+
+//type Key =
+//    | DocK
+//    | HeadK
+//    | IdK of IdK
+//    | StrK of StrK
+//    interface IKey

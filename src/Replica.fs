@@ -11,25 +11,53 @@ type Replica =
         receivedOps: List<Operation>
     }
 
-    member __.EvalExpr(expr: IExpr): ICursor =
-        let rec go (expr: IExpr) (fs: List<ICursor -> ICursor>) =
+    member __.ApplyCmd(cmd) =
+        Replica.ApplyCmds(__, [cmd])
+
+    member __.ApplyCmds(cmds) =
+        Replica.ApplyCmds(__, cmds)
+
+    member __.ApplyLocal(op) =
+        { __ with
+            document = __.document.ApplyOp(op, __)
+            processedOps = __.processedOps.Add(op.id)
+            generatedOps = __.generatedOps @ [op]
+        }
+
+    member __.EvalExpr(expr: IExpr): Cursor =
+        let rec go (expr: IExpr, fs: list<Cursor -> Cursor>) =
             match expr with
             | :? Doc as e ->
                 Cursor.Doc
             | :? Var as e ->
                 Cursor.Doc
             | :? DownField as e ->
-                let f = fun (c: Cursor) ->
-                    match c.FinalKey with
-                    | HeadK -> c
-                    | _ -> c.Append MapT (StrK e.key)
-                //go e.expr f :: fs
-                Cursor.Doc
+                let f: Cursor -> Cursor = fun c ->
+                    match box c.FinalKey with
+                    | :? HeadK -> c
+                    | _ -> c.Append((fun k -> { MapT.key = k } :> IBranchTag), { StrK.Str = e.key })
+                go(e.expr, f :: fs)
+            | :? Iter as e ->
+                let f: Cursor -> Cursor = fun c ->
+                    c.Append((fun k -> { ListT.key = k } :> IBranchTag), HeadK())
+                go(e.expr, f :: fs)
             | _ -> Cursor.Doc
 
-        go expr List.Empty
+        go(expr, List.Empty)()
+
+    member __.CurrentId() =
+        {
+            Id.opsCounter = __.opsCounter
+            Id.replicaId = __.replicaId
+        }
+
+    member __.IncrementCounter() =
+        { __ with opsCounter = __.opsCounter + bigint.One }
 
     member __.MakeOp(cursor: ICursor, mutation: Mutation): Replica =
+        let newReplica = __.IncrementCounter()
+        let op = { Operation.id = newReplica.CurrentId(); Operation.deps = __.processedOps; Operation.cur = cursor; Operation.mut = mutation }
+        newReplica.ApplyLocal(op)
         failwith "Not implemented"
 
     static member ApplyCmds(replica: Replica, cmds: Cmd list) =
