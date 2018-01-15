@@ -20,7 +20,7 @@ type Replica =
                 Cursor.Doc
             | :? DownField as e ->
                 let f = fun (c: Cursor) ->
-                    match c.finalKey with
+                    match c.FinalKey with
                     | HeadK -> c
                     | _ -> c.Append MapT (StrK e.key)
                 //go e.expr f :: fs
