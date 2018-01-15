@@ -8,7 +8,7 @@ type IView =
 
 type Leaf =
     {
-        finalKey: Key
+        FinalKey: Key
     }
     interface IView
 
@@ -21,34 +21,34 @@ type Branch =
 
 type Cursor =
     {
-        keys: list<BranchTag>
-        finalKey: Key
+        Keys: list<BranchTag>
+        FinalKey: Key
     }
     interface ICursor
 
     member __.Append(tag: Key -> BranchTag, newFinalKey: Key): Cursor =
         {
-            keys = List.append __.keys [tag(__.finalKey)]
-            finalKey = newFinalKey
+            Keys = List.append __.Keys [tag(__.FinalKey)]
+            FinalKey = newFinalKey
         }
 
     member __.View(): IView =
-        match __.keys with
+        match __.Keys with
         | x :: xs ->
             {
                 head = x
-                tail = { keys = xs; finalKey = __.finalKey }
+                tail = { Keys = xs; FinalKey = __.FinalKey }
             } :> IView
         | _ ->
             {
-                finalKey = __.finalKey
+                FinalKey = __.FinalKey
             } :> IView
 
-    static member Doc(): Cursor =
+    static member Doc() =
         Cursor.WithFinalKey(Key.DocK)
 
-    static member WithFinalKey(finalKey: Key): Cursor =
+    static member WithFinalKey(finalKey: Key) =
         {
-            keys = List.empty
-            finalKey = finalKey
-        }
+            Keys = List.empty
+            FinalKey = finalKey
+        } :> ICursor

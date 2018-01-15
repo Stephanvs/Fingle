@@ -11,10 +11,25 @@ type Replica =
         receivedOps: List<Operation>
     }
 
-    member __.EvalExpr(expr: Expr): ICursor =
-        failwith "Not implemented"
+    member __.EvalExpr(expr: IExpr): ICursor =
+        let rec go (expr: IExpr) (fs: List<ICursor -> ICursor>) =
+            match expr with
+            | :? Doc as e ->
+                Cursor.Doc
+            | :? Var as e ->
+                Cursor.Doc
+            | :? DownField as e ->
+                let f = fun (c: Cursor) ->
+                    match c.finalKey with
+                    | HeadK -> c
+                    | _ -> c.Append MapT (StrK e.key)
+                //go e.expr f :: fs
+                Cursor.Doc
+            | _ -> Cursor.Doc
 
-    member __.MakeOp(cursor, mutation): Replica =
+        go expr List.Empty
+
+    member __.MakeOp(cursor: ICursor, mutation: Mutation): Replica =
         failwith "Not implemented"
 
     static member ApplyCmds(replica: Replica, cmds: Cmd list) =
@@ -32,7 +47,7 @@ type Replica =
                 let newReplica = replica.MakeOp(replica.EvalExpr(c.Expr), { InsertM.Value = c.Value })
                 Replica.ApplyCmds(newReplica, rest)
             | :? Delete as c ->
-                let newReplica = replica.MakeOp(replica.EvalExpr(c.Expr), DeleteM)
+                let newReplica = replica.MakeOp(replica.EvalExpr(c.Expr), DeleteM())
                 Replica.ApplyCmds(newReplica, rest)
             | :? MoveVertical as c ->
                 let newReplica = replica.MakeOp(replica.EvalExpr(c.MoveExpr), { MoveVerticalM.TargetCursor = replica.EvalExpr(c.TargetExpr); MoveVerticalM.BeforeAfter = c.BeforeAfter })
