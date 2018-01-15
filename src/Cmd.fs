@@ -15,34 +15,34 @@ type Cmd =
 type Let =
     {
         X: Var
-        Expr: Expr
+        Expr: IExpr
     }
     interface Cmd
 
 type Assign =
     {
-        Expr: Expr
+        Expr: IExpr
         Value: Val
     }
     interface Cmd
 
 type Insert =
     {
-        Expr: Expr
+        Expr: IExpr
         Value: Val
     }
     interface Cmd
 
 type Delete =
     {
-        Expr: Expr
+        Expr: IExpr
     }
     interface Cmd
 
 type MoveVertical =
     {
-        MoveExpr: Expr
-        TargetExpr: Expr
+        MoveExpr: IExpr
+        TargetExpr: IExpr
         BeforeAfter: BeforeAfter
     }
     interface Cmd
