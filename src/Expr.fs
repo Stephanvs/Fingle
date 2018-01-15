@@ -2,30 +2,33 @@ namespace Fingle
 
 type IExpr = interface end
 
+type Doc =
+    inherit IExpr
+
 type Var =
     {
         name: string
     }
-     interface IExpr
+    interface IExpr
 
 type DownField =
     {
         expr: IExpr
         key: string
     }
-     interface IExpr
+    interface IExpr
 
 type Iter =
     {
         expr: IExpr
     }
-     interface IExpr
+    interface IExpr
 
 type Next =
     {
         expr: IExpr
     }
-     interface IExpr
+    interface IExpr
 
 type Expr =
     | Doc of IExpr
