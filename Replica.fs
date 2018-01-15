@@ -17,7 +17,7 @@ type Replica =
     member __.MakeOp(cursor, mutation): Replica =
         failwith "Not implemented"
 
-    static member ApplyCmds(replica, cmds) =
+    static member ApplyCmds(replica: Replica, cmds: Cmd list) =
         match cmds with
         | cmd :: rest ->
             match box cmd with
