@@ -33,13 +33,13 @@ type Replica =
                 Cursor.Doc
             | :? DownField as e ->
                 let f: Cursor -> Cursor = fun c ->
-                    match box c.FinalKey with
-                    | :? HeadK -> c
-                    | _ -> c.Append((fun k -> { MapT.key = k } :> IBranchTag), { StrK.Str = e.key })
+                    match c.FinalKey with
+                    | HeadK -> c
+                    | _ -> c.Append((fun k -> { MapT.key = k } :> IBranchTag), StrK e.key)
                 go(e.expr, f :: fs)
             | :? Iter as e ->
                 let f: Cursor -> Cursor = fun c ->
-                    c.Append((fun k -> { ListT.key = k } :> IBranchTag), HeadK())
+                    c.Append((fun k -> { ListT.key = k } :> IBranchTag), HeadK)
                 go(e.expr, f :: fs)
             | _ -> Cursor.Doc
 
@@ -99,7 +99,7 @@ type Replica =
 
 
 
- //module Replica =
+//module Replica =
     // let hello name =
     //     printfn "%s", { Str.value = name }
 

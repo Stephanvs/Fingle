@@ -6,19 +6,19 @@ type IBranchTag = inherit ITypeTag
 
 type MapT =
     {
-        key: IKey
+        key: Key
     }
     interface IBranchTag
 
 type ListT =
     {
-        key: IKey
+        key: Key
     }
     interface IBranchTag
 
 type RegT =
     {
-        key: IKey
+        key: Key
     }
 
 type BranchTag =
@@ -28,4 +28,4 @@ type BranchTag =
 
 type TypeTag =
     | RegT of RegT
-    interface ITypeTag
+    //interface ITypeTag
