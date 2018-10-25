@@ -2,6 +2,17 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
+  <PropertyGroup>
+    <PackageId>Fingle</PackageId>
+    <Title>Fingle</Title>
+    <Description>A conflict-free replicable datatype (CRDT) for .NET</Description>
+    <Authors>Stephan van Stekelenburg</Authors>
+    <Copyright>Hayman</Copyright>
+    <PackageProjectUrl>https://github.com/Stephanvs/Fingle</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Stephanvs/Fingle</RepositoryUrl>
+    <PackageTags>crdt;fsharp;dotnet-core</PackageTags>
+    <IncludeSymbols>true</IncludeSymbols>
+  </PropertyGroup>
   <ItemGroup>
     <Compile Include="ReplicaId.fs" />
     <Compile Include="Id.fs" />
