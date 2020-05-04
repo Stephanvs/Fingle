@@ -28,7 +28,7 @@ type Replica =
         let rec go (expr: IExpr, fs: list<Cursor -> Cursor>) =
             match expr with
             | :? Doc as e ->
-                Cursor.Doc
+                Cursor.Doc()
             | :? Var as e ->
                 Cursor.Doc
             | :? DownField as e ->
