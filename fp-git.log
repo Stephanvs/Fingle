@@ -1,0 +1,168 @@
+commit c38033e77a71473b57c44f2b7c0c7c344258556c
+Author: Stephan van Stekelenburg <stephan.van.stekelenburg@gmail.com>
+Date:   Mon May 4 23:12:23 2020 +0200
+
+    Call doc as function, and include static Next function on Node
+
+commit 4bda913c4d65dc0f4b3a2547ef48e9d072c85186
+Author: Stephan van Stekelenburg <stephan.van.stekelenburg@gmail.com>
+Date:   Thu Oct 25 13:25:02 2018 +0200
+
+    Use dotnet pack for packaging
+
+commit 82deeaa7c34d99f207386e53f0c8f67072aa8f1c
+Author: Stephan van Stekelenburg <stephan.van.stekelenburg@gmail.com>
+Date:   Thu Oct 25 13:05:35 2018 +0200
+
+    Updated pipeline
+
+commit 4c577bcc68f3c25fb1bd308348ef676b34fb87f9
+Merge: 26f0496 927e990
+Author: Stephan van Stekelenburg <stephan.van.stekelenburg@gmail.com>
+Date:   Thu Oct 25 12:13:27 2018 +0200
+
+    Merge branch 'master' of https://github.com/Stephanvs/Fingle
+
+commit 26f04960caa8411209c62c994cf7ef6e34d14824
+Author: Stephan van Stekelenburg <stephan.van.stekelenburg@gmail.com>
+Date:   Thu Oct 25 12:13:15 2018 +0200
+
+    Added nuget package info to project file
+
+commit daa3e69522bdfb8e7559543e6ad5da2d83765eb9
+Author: Stephan van Stekelenburg <stephan.van.stekelenburg@gmail.com>
+Date:   Fri Jan 19 22:25:49 2018 +0100
+
+    Changes to types
+
+commit cd7a4e4eb5f4a6e293befd3431ec8ec136d122d8
+Author: Stephan van Stekelenburg <stephan.van.stekelenburg@gmail.com>
+Date:   Mon Jan 15 22:36:38 2018 +0100
+
+    Minor changes
+
+commit c7f27398a9b383c7d2e578392cf87b451314d8b1
+Author: Stephan van Stekelenburg <stephan.vanstekelenburg@afas.nl>
+Date:   Mon Jan 15 18:23:32 2018 +0100
+
+    Lot's of replica work
+
+commit 02f72814e080758ff297d851b0d4ad732c111c0d
+Author: Stephan van Stekelenburg <stephan.vanstekelenburg@afas.nl>
+Date:   Mon Jan 15 16:56:30 2018 +0100
+
+    Use renamed FinalKey property
+
+commit b225ee64538d96c2d53b60f2760711b9a915e984
+Author: Stephan van Stekelenburg <stephan.vanstekelenburg@afas.nl>
+Date:   Mon Jan 15 16:56:00 2018 +0100
+
+    Naming refactorings
+
+commit e3083135377c55a5f7bb74db47ebf2b08b70e173
+Author: Stephan van Stekelenburg <stephan.vanstekelenburg@afas.nl>
+Date:   Mon Jan 15 16:54:56 2018 +0100
+
+    Doc type and formatting
+
+commit 00bd9b2cde4b053ed96044a0ba29da68b5166a7a
+Author: Stephan van Stekelenburg <stephan.vanstekelenburg@afas.nl>
+Date:   Mon Jan 15 16:54:37 2018 +0100
+
+    Use IExpr when possible
+
+commit 18702c62e9b63582a9c371e2dd0cc887013f6616
+Author: Stephan van Stekelenburg <stephan.vanstekelenburg@afas.nl>
+Date:   Mon Jan 15 14:07:08 2018 +0100
+
+    No need to box `cmd`
+
+commit 157175d57c5a865ed5a0e87e1387990b6f6a3250
+Author: Stephan van Stekelenburg <stephan.vanstekelenburg@afas.nl>
+Date:   Mon Jan 15 14:04:17 2018 +0100
+
+    Moved code to src folder
+
+commit ee29a990eeac98057d69318255138cd0e82f3362
+Author: Stephan van Stekelenburg <stephan.vanstekelenburg@afas.nl>
+Date:   Mon Jan 15 14:00:55 2018 +0100
+
+    Re-added type annotation
+
+commit 29c0420b54138444ddd14492e31e2ee57b5659d7
+Author: Stephan van Stekelenburg <stephan.vanstekelenburg@afas.nl>
+Date:   Mon Jan 15 13:57:49 2018 +0100
+
+    box cmd value in match expression
+
+commit c693054de4500226baf8f0c671c2827f461d7198
+Author: Stephan van Stekelenburg <stephan.van.stekelenburg@gmail.com>
+Date:   Sun Jan 14 17:23:54 2018 +0100
+
+    Removed unnecessary type annotations
+
+commit 4db7ec28901251d21816707387de52f6ebe0338e
+Author: Stephan van Stekelenburg <stephan.van.stekelenburg@gmail.com>
+Date:   Sun Jan 14 14:34:55 2018 +0100
+
+    Implemented replica function ApplyCmds
+
+commit aee24bab49a7eb58eaa48ad2bf543894796a6798
+Author: Stephan van Stekelenburg <stephan.van.stekelenburg@gmail.com>
+Date:   Tue Jan 9 22:53:40 2018 +0100
+
+    Trying to get pattern match working
+
+commit 78bf15128e173870495005aa88d56d24f475a0cb
+Author: Stephan van Stekelenburg <stephan.van.stekelenburg@gmail.com>
+Date:   Sun Jan 7 22:28:59 2018 +0100
+
+    Renamed interface and improved Val type
+
+commit f665a0f17bbb87bd9cd1c8dc80244e36d4790b5e
+Author: Stephan van Stekelenburg <stephan.van.stekelenburg@gmail.com>
+Date:   Tue Jan 2 23:20:45 2018 +0100
+
+    Changed val implementation to use inline derivatives
+
+commit a448dc0eaaf0f64df3c002620f0725cabd3ce69c
+Author: Stephan van Stekelenburg <stephan.van.stekelenburg@gmail.com>
+Date:   Tue Jan 2 23:18:11 2018 +0100
+
+    Stuff
+
+commit f42d43137c4622bc60361971b485c381bce73fdb
+Author: Stephan van Stekelenburg <Stephanvs@users.noreply.github.com>
+Date:   Wed Dec 27 22:37:42 2017 +0100
+
+    Create LICENSE
+
+commit 7a6c004b133c2c3e68ac6e8023eac98031413d59
+Author: Stephan van Stekelenburg <stephan.van.stekelenburg@gmail.com>
+Date:   Wed Dec 27 22:09:18 2017 +0100
+
+    Also compare OpsCounter
+
+commit 08bbace432290fa49c45ccc652bc6a4d101a7473
+Author: Stephan van Stekelenburg <stephan.van.stekelenburg@gmail.com>
+Date:   Wed Dec 27 22:03:17 2017 +0100
+
+    Fixed build issue around comparable Ids
+
+commit fb287728badfb60304f0ad7bb1df028e8bfab888
+Author: Stephan van Stekelenburg <stephan.van.stekelenburg@gmail.com>
+Date:   Wed Dec 27 21:13:12 2017 +0100
+
+    Corrected Str reference
+
+commit b3183c845b2f8c30050b71272ef8ece1baab42cc
+Author: Stephan van Stekelenburg <stephan.van.stekelenburg@gmail.com>
+Date:   Wed Dec 27 21:12:43 2017 +0100
+
+    Removed unneeded type declarations
+
+commit a2564384bf83457735421b7daea9510d59a0c37a
+Author: Stephan van Stekelenburg <stephan.van.stekelenburg@gmail.com>
+Date:   Wed Dec 27 06:57:15 2017 +0100
+
+    Initial commit
